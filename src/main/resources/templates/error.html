@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>Oops!</title>
+    <link rel="stylesheet" th:href="@{/style.css}"></link>
+  </head>
+
+  <html>
+    <div class="errorPage">
+      <span class="oops">Oops! Error Page</span><br/>
+      <img th:src="@{/MissingPage.png}"></img>
+      <p>There seems to be a problem with the page you requested 
+         (<span text="${path}">/Event Processor Home Page</span>).</p>
+      <p th:text="${'Details: ' + message}"></p>
+    </div>
+    
+    <h2>API Links</h2>
+		
+		<p><a href="/">Welcome Event Processor Home Page</a></p>
+		<p><a href="/home">Welcome Event Processor Home Page</a></p>
+		<p><a href="/stats">Visit Event Processor Stats page</a></p>
+    
+    
+    
+  </html>
+
+</html>

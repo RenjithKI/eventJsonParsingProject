@@ -1,0 +1,22 @@
+<html>
+<head>
+<title>Stats</title>
+<link rel="stylesheet" th:href="@{/style.css}"></link>
+</head>
+
+<body>
+	<h1>Stats</h1>
+
+	<h4>Events</h4>
+
+	<td th:each="mapEntry, iterStat : ${eventMap}"
+		th:text="!${iterStat.last} == true ? ${mapEntry.key} + ':' + ${mapEntry.value} + ', '  : (${mapEntry.key} + ':' + ${mapEntry.value})"></span>
+	</td>
+
+	<h4>Words</h4>
+	<td th:each="mapEntry, iterStat : ${dataMap}"
+		th:text="!${iterStat.last} == true ? ${mapEntry.key} + ':' + ${mapEntry.value} + ', '  : (${mapEntry.key} + ':' + ${mapEntry.value})">
+	</td>	
+	
+</body>
+</html>
