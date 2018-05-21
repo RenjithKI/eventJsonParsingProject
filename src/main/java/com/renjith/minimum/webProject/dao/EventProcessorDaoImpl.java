@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
+/*import org.springframework.context.annotation.Primary;*/
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -24,7 +24,7 @@ import com.renjith.minimum.webProject.domain.EventObject;
  *
  */
 @Component
-@Primary
+/*@Primary*/
 public class EventProcessorDaoImpl implements EventProcessorDao {
 
 	private List<EventObject> list = new ArrayList<>(2100);
