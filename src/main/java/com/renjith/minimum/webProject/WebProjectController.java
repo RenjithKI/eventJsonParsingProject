@@ -33,8 +33,8 @@ public class WebProjectController {
 	@RequestMapping(value = "/stats", method=RequestMethod.GET)
 	public String stats(Model model) {
 		logger.info("inside stats method");
-		Map<String, Integer> eventMap = eventProcessService.getEventMap();
-		Map<String, Integer> dataMap = eventProcessService.getDataMap();
+		Map<String, Long> eventMap = eventProcessService.getEventMap();
+		Map<String, Long> dataMap = eventProcessService.getDataMap();
 		if (eventMap != null) {	
 			model.addAttribute("eventMap", eventMap);			
 		}

@@ -17,12 +17,12 @@ public class EventProcessServiceImpl implements EventProcessService  {
 	private EventProcessorDao eventProcessorDao;
 
 	@Override
-	public Map<String, Integer> getEventMap() {		
+	public Map<String, Long> getEventMap() {		
 		return eventProcessorDao.getEventMap();
 	}
 
 	@Override
-	public Map<String, Integer> getDataMap() {		
+	public Map<String, Long> getDataMap() {		
 		return eventProcessorDao.getDataMap();
 	}
 

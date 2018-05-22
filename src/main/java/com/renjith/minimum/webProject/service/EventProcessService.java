@@ -6,9 +6,9 @@ import java.util.Map;
  */
 public interface EventProcessService {	
 
-	public Map<String, Integer> getEventMap();
+	public Map<String, Long> getEventMap();
 
-	public Map<String, Integer> getDataMap();
+	public Map<String, Long> getDataMap();
 	
 
 }

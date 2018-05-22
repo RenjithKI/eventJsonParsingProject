@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -45,8 +46,7 @@ public class EventProcessorUtils {
 
 		for (String line : listring) {
 			try {
-				EventObject objJson = mapper.readValue(line, EventObject.class);
-				//getStats(objJson);
+				EventObject objJson = mapper.readValue(line, EventObject.class);				
 				list.add(objJson);
 			} catch (JsonGenerationException e) {
 				e.printStackTrace();
@@ -60,29 +60,18 @@ public class EventProcessorUtils {
 	}
 
 
-	public static Map<String, Map<String, Integer> > getStats(List<EventObject> objList) {		
+	public static Map<String, Map<String, Long>> getStats(List<EventObject> objList) {
+		
+		Map<String, Map<String, Long> > map = new HashMap<>(2);
 
-		Map<String, Map<String, Integer> > map = new HashMap<String, Map<String, Integer> >(2);
-		Map<String, Integer> eventMap = new HashMap<String, Integer>();
-		Map<String, Integer> dataMap = new HashMap<String, Integer>();
-
-
-		for (EventObject o : objList) {
-			String eventType = o.getEvent_type();
-			String data = o.getData();
-			if (eventMap.containsKey(eventType)) {
-				eventMap.put(eventType, eventMap.get(eventType) + 1);
-			} else {
-				eventMap.put(eventType, 1);
-			}
-			if (dataMap.containsKey(data)) {
-				dataMap.put(data, dataMap.get(data) + 1);
-			} else {
-				dataMap.put(data, 1);
-			} 
-		}
-		map.put("event", eventMap);
-		map.put("data", dataMap);
+		Map<String, Long> eventStat =
+				objList.parallelStream().collect(Collectors.groupingBy(EventObject::getEvent_type, (Collectors.counting()) ));		
+		
+		Map<String, Long> dataStat =
+				objList.parallelStream().collect(Collectors.groupingBy(EventObject::getData, Collectors.counting() ));		
+		
+		map.put("event", eventStat);
+		map.put("data", dataStat);
 		return map;
 	}
 }
