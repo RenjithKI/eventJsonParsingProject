@@ -42,12 +42,12 @@ public class EventProcessorUtils {
 
 	public static List<EventObject> parseJsonObjFromString(List<String>  listring) {
 		List<EventObject> list = new ArrayList<>(2100);		
-		ObjectMapper mapper = new ObjectMapper();		
-
-		for (String line : listring) {
+		ObjectMapper mapper = new ObjectMapper();	
+		
+		list = listring.parallelStream().map(line -> {			
+			EventObject obj = null;
 			try {
-				EventObject objJson = mapper.readValue(line, EventObject.class);				
-				list.add(objJson);
+				obj = mapper.readValue(line, EventObject.class);
 			} catch (JsonGenerationException e) {
 				e.printStackTrace();
 			} catch (JsonMappingException e) {
@@ -55,7 +55,9 @@ public class EventProcessorUtils {
 			} catch (IOException e) {
 				e.printStackTrace();
 			} 
-		}
+            
+            return obj;
+        }).collect(Collectors.toList());
 		return list;
 	}
 
